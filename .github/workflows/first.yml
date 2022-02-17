@@ -25,7 +25,7 @@ jobs:
         uses: testrepo/git-commit-action-data@v1.x
         
       - name: Raise PR
-        uses: testrepo/create-pull-request@v3
+        uses: Kishore/create-pull-request@v3
         with: 
           branch: "auto-pr-branch"
           base: master
