@@ -17,5 +17,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: JasonEtco/create-an-issue@v2
+        with:
+          assignees: "monalisa, doctocat, hubot"
+          labels: "weekly sync, docs-team"
+          title: "Team sync"      
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
