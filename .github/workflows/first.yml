@@ -15,25 +15,15 @@ jobs:
   stuff:
     runs-on: ubuntu-latest
     steps:
-      - name: Check modified files
-        id: check_files
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v18.6
+
+      - name: List all changed files
         run: |
-          echo "=============== list modified files ==============="
-          git diff --name-only HEAD^ HEAD
-          
-          echo "========== check paths of modified files =========="
-          git diff --name-only HEAD^ HEAD > files.txt
-          while IFS= read -r file
-          do
-            echo $file
-            if [[ $file != db/* ]]; then
-              echo "This modified file is not under the 'db' folder."
-              echo "::set-output name=run_job::false"
-              break
-            else
-              echo "::set-output name=run_job::true"
-            fi
-          done < files.txt
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$file was changed"
+          done
       - name: Create an issue
         uses: imjohnbo/issue-bot@3daae12aa54d38685d7ff8459fc8a2aee8cea98b
         with:
