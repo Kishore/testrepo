@@ -26,8 +26,9 @@ jobs:
       - name: List all changed files
         run: |
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            if: contains(file,'daass/server/scripts/')
-            echo "$file was changed"
+            if: contains('${{file}}','daass/server/scripts/')
+            run: |
+              echo "$file was changed"
           done
       - name: Create an issue
         uses: imjohnbo/issue-bot@3daae12aa54d38685d7ff8459fc8a2aee8cea98b
